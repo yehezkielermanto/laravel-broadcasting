@@ -17,15 +17,16 @@ class HelloEvent implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public $text;
+    public function __construct($text)
     {
-        //
+        $this->text = $text;
     }
 
     public function broadcastWith()
     {
         return [
-            'hello' =>'there'
+            'message' => $this->text
         ];
     }
 

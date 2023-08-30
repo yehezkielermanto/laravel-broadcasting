@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\HelloEvent;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/send-event', function(){
-    broadcast(new HelloEvent());
+Route::post('/send-event', function(Request $request){
+    $value = $request->input('value');
+    broadcast(new HelloEvent($value));
+    return  "success";
 });
