@@ -18,7 +18,7 @@ class HelloEvent implements ShouldBroadcast
      * Create a new event instance.
      */
     public $text;
-    public function __construct($text)
+    public function __construct($text, public $userId)
     {
         $this->text = $text;
     }
@@ -38,7 +38,8 @@ class HelloEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('hello-channel'),
+            // new Channel('hello-channel'),
+            new PrivateChannel('hello-private.'.$this->userId)
         ];
     }
 }

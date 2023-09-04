@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\HelloEvent;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,7 @@ Route::get('/', function () {
 
 Route::post('/send-event', function(Request $request){
     $value = $request->input('value');
-    broadcast(new HelloEvent($value));
+    broadcast(new HelloEvent($value, 1));
+    // broadcast(new HelloEvent($value));
     return  "success";
 });
