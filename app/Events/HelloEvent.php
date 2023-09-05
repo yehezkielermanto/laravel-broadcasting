@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -18,9 +19,11 @@ class HelloEvent implements ShouldBroadcast
      * Create a new event instance.
      */
     public $text;
-    public function __construct($text, public $userId)
+    private $userId;
+    public function __construct($text, $userId)
     {
         $this->text = $text;
+        $this->userId = $userId;
     }
 
     public function broadcastWith()
@@ -39,7 +42,7 @@ class HelloEvent implements ShouldBroadcast
     {
         return [
             // new Channel('hello-channel'),
-            new PrivateChannel('hello-private.'.$this->userId)
+            new PrivateChannel('hello.'.$this->userId)
         ];
     }
 }
